@@ -1,0 +1,13 @@
+---
+env:
+  cluster_cert: /etc/secrets/kong-cluster-cert/tls.crt
+  cluster_cert_key: /etc/secrets/kong-cluster-cert/tls.key
+  cluster_control_plane: 6fae8e8f10.us.cp0.konghq.com:443
+  cluster_server_name: 6fae8e8f10.us.cp0.konghq.com
+  cluster_telemetry_endpoint: 6fae8e8f10.us.tp0.konghq.com:443
+  cluster_telemetry_server_name: 6fae8e8f10.us.tp0.konghq.com
+secretVolumes:
+  - kong-cluster-cert
+autoscaling:
+  enabled: true
+  minReplicas: 4

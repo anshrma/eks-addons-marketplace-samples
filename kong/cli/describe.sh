@@ -1,0 +1,1 @@
+aws eks describe-addon --cluster-name kubecon2023 --addon-name kong_konnect-ri

@@ -1,0 +1,22 @@
+Parameters:
+  ClusterName:
+    Type: String
+    Description: The name of the EKS cluster to install Addons
+    Default: kubecon2023
+Resources:
+  EBSCSIDriver:
+    Type: AWS::EKS::Addon
+    Properties: 
+      AddonName: aws-ebs-csi-driver
+      #Optionally specify the version of the addon. If you do not specify a version, the latest version is used.
+      AddonVersion: v1.24.0-eksbuild.1
+      ClusterName: !Ref ClusterName
+      PreserveOnDelete: false
+      ResolveConflicts: OVERWRITE
+  Kubecost:
+    Type: AWS::EKS::Addon
+    Properties: 
+      AddonName: kubecost_kubecost
+      ClusterName: !Ref ClusterName
+      PreserveOnDelete: false
+      ResolveConflicts: OVERWRITE

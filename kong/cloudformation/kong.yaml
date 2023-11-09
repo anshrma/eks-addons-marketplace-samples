@@ -1,0 +1,29 @@
+Parameters:
+  ClusterName:
+    Type: String
+    Description: The name of the EKS cluster to install Addons
+    Default: kubecon2023
+Resources:
+  KongDp:
+    Type: AWS::EKS::Addon
+    Properties: 
+      AddonName: kong_konnect-ri
+      AddonVersion: v3.4.1-eksbuild.1
+      ClusterName: !Ref ClusterName
+      PreserveOnDelete: false
+      ResolveConflicts: OVERWRITE
+      ConfigurationValues: |-
+        ---
+        env:
+          cluster_cert: "/etc/secrets/kong-cluster-cert/tls.crt"
+          cluster_cert_key: "/etc/secrets/kong-cluster-cert/tls.key"
+          cluster_control_plane: da539808f7.us.cp0.konghq.com:443
+          cluster_server_name: da539808f7.us.cp0.konghq.com
+          cluster_telemetry_endpoint: da539808f7.us.tp0.konghq.com:443
+          cluster_telemetry_server_name: da539808f7.us.tp0.konghq.com
+        secretVolumes:
+        - kong-cluster-cert
+        autoscaling:
+          enabled: true
+          minReplicas: 4
+          
