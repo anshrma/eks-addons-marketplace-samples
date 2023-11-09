@@ -1,4 +1,4 @@
-# KubeCost AddOn
+# Kong Konnect Dataplane AddOn
 
 ## Pre-Requisite
 
